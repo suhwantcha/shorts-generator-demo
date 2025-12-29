@@ -1,7 +1,5 @@
 # 🚀 Tech Shorts 자동화 시스템 - 실행 가이드
 
-VSCode에서 프로젝트를 열었다면, 이제 실행 준비를 시작하겠습니다!
-
 ---
 
 ## 📋 목차
@@ -473,86 +471,6 @@ gcloud logging tail "resource.type=cloud_function OR resource.type=cloud_run_rev
 
 ---
 
-## 5. 문제 해결
-
-### ❌ 문제 1: `gcloud: command not found`
-
-```bash
-# Google Cloud SDK 설치
-# Mac
-brew install google-cloud-sdk
-
-# Ubuntu
-curl https://sdk.cloud.google.com | bash
-exec -l $SHELL
-
-# Windows
-# https://cloud.google.com/sdk/docs/install 에서 설치 프로그램 다운로드
-```
-
-### ❌ 문제 2: `Permission denied` 오류
-
-```bash
-# GCP 인증 다시 로그인
-gcloud auth login
-gcloud auth application-default login
-
-# 프로젝트 설정 확인
-gcloud config list
-
-# 서비스 계정 권한 확인
-gcloud projects get-iam-policy $GCP_PROJECT_ID
-```
-
-### ❌ 문제 3: FFmpeg 미설치
-
-```bash
-# Mac
-brew install ffmpeg
-
-# Ubuntu/Debian
-sudo apt update
-sudo apt install ffmpeg
-
-# Windows
-# https://ffmpeg.org/download.html
-# 다운로드 후 PATH 환경 변수에 추가
-```
-
-### ❌ 문제 4: 한글 자막 깨짐
-
-```bash
-# Linux에서 한글 폰트 설치
-sudo apt install fonts-noto-cjk fonts-noto-cjk-extra
-
-# 폰트 확인
-fc-list :lang=ko
-
-# Dockerfile이 정확한지 확인
-cat 4-video-editor/Dockerfile | grep fonts-noto-cjk
-```
-
-### ❌ 문제 5: API 할당량 초과
-
-```bash
-# API 할당량 확인
-# https://console.cloud.google.com/apis/api/APINAME/quotas
-
-# 할당량 증가 요청
-# 각 API 페이지에서 "할당량 증가 요청" 클릭
-```
-
-### ❌ 문제 6: OAuth 인증 실패
-
-```bash
-# Refresh Token 재발급
-# 1. credentials.json 다시 다운로드
-# 2. OAuth Playground 또는 로컬 스크립트로 재발급
-# 3. .env 파일 업데이트
-```
-
----
-
 ## 🎯 빠른 시작 체크리스트
 
 - [ ] Python 3.11 설치
@@ -596,12 +514,3 @@ gcloud firestore collections documents list scripts --limit=10
 ```
 
 ---
-
-**🚀 이제 실행할 준비가 완료되었습니다!**
-
-1. **로컬 테스트**: Phase별로 `python main.py` 실행
-2. **클라우드 배포**: `./deploy_all_phases.sh` 실행
-3. **자동 실행 설정**: Cloud Scheduler 설정
-4. **첫 영상 생성**: Pub/Sub 트리거 또는 스케줄러 대기
-
-**질문이 있으면 언제든 물어보세요!** 💪
